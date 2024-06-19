@@ -1,0 +1,152 @@
+---
+openapi: 3.1.0
+info:
+  title: SkyU AI Code Fix
+  version: 0.1.0
+paths:
+  "/identify-files/":
+    post:
+      tags:
+      - identify-files
+      summary: Identify Files Endpoint
+      operationId: identify_files_endpoint_identify_files__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/IdentifyFilesPayload"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/fix-errors":
+    post:
+      tags:
+      - find-and-fix-errors
+      summary: Find Fix Errors
+      operationId: find_fix_errors_fix_errors_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/FindAndFixErrorsPayload"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/fix-errors/{task_id}":
+    get:
+      tags:
+      - find-and-fix-errors
+      summary: Check Task Status
+      operationId: check_task_status_fix_errors__task_id__get
+      parameters:
+      - name: task_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Task Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/health":
+    get:
+      tags:
+      - Health
+      summary: Health Check
+      operationId: health_check_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    FindAndFixErrorsPayload:
+      properties:
+        code_dict:
+          additionalProperties:
+            type: string
+          type: object
+          title: Code Dict
+        error_log:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Log
+      type: object
+      required:
+      - code_dict
+      title: FindAndFixErrorsPayload
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    IdentifyFilesPayload:
+      properties:
+        available_files:
+          type: string
+          title: Available Files
+        error_message:
+          type: string
+          title: Error Message
+      type: object
+      required:
+      - available_files
+      - error_message
+      title: IdentifyFilesPayload
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
