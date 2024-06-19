@@ -1,0 +1,339 @@
+openapi: 3.0.1
+info:
+  title: Teams API
+  version: 1.0.0
+paths:
+  /teams:
+    post:
+      summary: Create a new team
+      tags:
+        - Teams
+      requestBody:
+        description: Team creation data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTeamDto'
+      parameters:
+        - name: traceId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-ENV-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Team created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto_CreateTeamResponseDto'
+  /teams/filter:
+    post:
+      summary: Find teams by IDs
+      tags:
+        - Teams
+      requestBody:
+        description: Team IDs to filter
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilterTeamsDto'
+      parameters:
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-TRACE-ID
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto_TeamArray'
+  /teams:
+    get:
+      summary: Get all teams
+      tags:
+        - Teams
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-ENV-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-TRACE-ID
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Team'
+                  meta:
+                    type: object
+                    additionalProperties:
+                      type: object
+                  userData:
+                    type: object
+                    additionalProperties:
+                      type: object
+  /teams/{id}:
+    get:
+      summary: Get a team by ID
+      tags:
+        - Teams
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-ENV-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-TRACE-ID
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Team data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto_Team'
+    put:
+      summary: Update a team by ID
+      tags:
+        - Teams
+      requestBody:
+        description: Team update data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTeamDto'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-ENV-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-TRACE-ID
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto_Team'
+    delete:
+      summary: Delete a team by ID
+      tags:
+        - Teams
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-ENV-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-TRACE-ID
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Team deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto_DeleteResult'
+components:
+  schemas:
+    CreateTeamDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    UpdateTeamDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    FilterTeamsDto:
+      type: object
+      properties:
+        teamIds:
+          type: array
+          items:
+            type: string
+    Team:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+    DeleteResult:
+      type: object
+      properties:
+        raw:
+          type: array
+          items:
+            type: object
+        affected:
+          type: integer
+    ApiResponseDto_CreateTeamResponseDto:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateTeamResponseDto'
+    ApiResponseDto_Team:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Team'
+    ApiResponseDto_TeamArray:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+    ApiResponseDto_DeleteResult:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/DeleteResult'
+    CreateTeamResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
