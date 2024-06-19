@@ -1,160 +1,32 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Teams API",
+    "title": "API Documentation",
     "version": "1.0.0"
   },
   "paths": {
-    "/teams": {
-      "post": {
-        "summary": "Create a new team",
-        "tags": ["Teams"],
-        "requestBody": {
-          "description": "Team creation data",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTeamDto"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "traceId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-organization-id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-project-id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-environment-id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Team created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponseDto_CreateTeamResponseDto"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/health": {
       "get": {
-        "summary": "Get all teams",
-        "tags": ["Teams"],
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 1
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 10
-            }
-          },
-          {
-            "name": "x-organization-id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-project-id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-environment-id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-trace-id",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "summary": "Check Health",
+        "operationId": "checkHealth",
         "responses": {
           "200": {
-            "description": "List of teams",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Team"
-                      }
-                    },
-                    "meta": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
-                    },
-                    "userData": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object"
-                      }
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "healthCheck": {
+                    "summary": "A successful health check",
+                    "value": {
+                      "status": "OK"
                     }
                   }
                 }
@@ -164,42 +36,53 @@
         }
       }
     },
-    "/teams/filter": {
+    "/roles": {
+      "get": {
+        "summary": "Get all roles",
+        "operationId": "findAllRoles",
+        "responses": {
+          "200": {
+            "description": "A list of roles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
-        "summary": "Find teams by IDs",
-        "tags": ["Teams"],
+        "summary": "Create a new role",
+        "operationId": "createRole",
         "requestBody": {
-          "description": "Team IDs to filter",
+          "description": "Role to add",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FilterTeamsDto"
+                "type": "object"
               }
             }
           }
         },
+        "responses": {
+          "201": {
+            "description": "Role created"
+          }
+        }
+      }
+    },
+    "/roles/{id}": {
+      "get": {
+        "summary": "Get role by ID",
+        "operationId": "findOneRole",
         "parameters": [
           {
-            "name": "x-organization-id",
-            "in": "header",
+            "name": "id",
+            "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-project-id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-trace-id",
-            "in": "header",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -207,128 +90,118 @@
         ],
         "responses": {
           "200": {
-            "description": "List of teams",
+            "description": "A role",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponseDto_TeamArray"
+                  "type": "string"
                 }
               }
             }
           }
         }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "CreateTeamDto": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          }
-        }
       },
-      "UpdateTeamDto": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          }
-        }
-      },
-      "FilterTeamsDto": {
-        "type": "object",
-        "properties": {
-          "teamIds": {
-            "type": "array",
-            "items": {
+      "delete": {
+        "summary": "Delete role by ID",
+        "operationId": "removeRole",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
               "type": "string"
             }
           }
-        }
-      },
-      "Team": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
+        ],
+        "responses": {
+          "204": {
+            "description": "Role deleted"
           }
         }
-      },
-      "DeleteResult": {
-        "type": "object",
-        "properties": {
-          "raw": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
-          },
-          "affected": {
-            "type": "integer"
-          }
-        }
-      },
-      "ApiResponseDto_CreateTeamResponseDto": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/CreateTeamResponseDto"
-          }
-        }
-      },
-      "ApiResponseDto_Team": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/Team"
-          }
-        }
-      },
-      "ApiResponseDto_TeamArray": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Team"
+      }
+    },
+    "/service-accounts": {
+      "get": {
+        "summary": "Get all service accounts",
+        "operationId": "findAllServiceAccounts",
+        "responses": {
+          "200": {
+            "description": "A list of service accounts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
           }
         }
       },
-      "ApiResponseDto_DeleteResult": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/DeleteResult"
+      "post": {
+        "summary": "Create a new service account",
+        "operationId": "createServiceAccount",
+        "requestBody": {
+          "description": "Service account to add",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Service account created"
+          }
+        }
+      }
+    },
+    "/service-accounts/{id}": {
+      "get": {
+        "summary": "Get service account by ID",
+        "operationId": "findOneServiceAccount",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A service account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
-      "CreateTeamResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
+      "delete": {
+        "summary": "Delete service account by ID",
+        "operationId": "removeServiceAccount",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Service account deleted"
           }
         }
       }
