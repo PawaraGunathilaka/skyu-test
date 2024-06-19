@@ -1,1 +1,339 @@
-{"openapi":"3.1.0","info":{"title":"SKYU API Chat","version":"0.1.0"},"paths":{"/chat/openapi-spec":{"post":{"tags":["API AI Chat"],"summary":"Chat Openapi Spec","operationId":"chat_openapi_spec_chat_openapi_spec_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/APISpecChatPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/test/spec":{"post":{"tags":["API AI Test"],"summary":"Test Spec","operationId":"test_spec_test_spec_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/APITestPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/test/endpoint":{"post":{"tags":["API AI Test"],"summary":"Test Specific Endpoint","operationId":"test_specific_endpoint_test_endpoint_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/APISpecificTestPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/generate/kubernetes":{"post":{"tags":["User Defined Spec Generation"],"summary":"Generate Kubernetes","operationId":"generate_kubernetes_generate_kubernetes_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/KubernetesYAMLPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/generate/swagger":{"post":{"tags":["User Defined Spec Generation"],"summary":"Generate Swagger","operationId":"generate_swagger_generate_swagger_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/SwaggerPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/generate/git-action-step":{"post":{"tags":["User Defined Spec Generation"],"summary":"Generate Gitaction Step","operationId":"generate_gitaction_step_generate_git_action_step_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/GitHubActionStepPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/generate/email-mapping":{"post":{"tags":["User Defined Spec Generation"],"summary":"Generate Git User Email Mapping","operationId":"generate_git_user_email_mapping_generate_email_mapping_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/EmailMapperPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/analysis/code-quality":{"post":{"tags":["AI Code Analysis"],"summary":"Code Quality","operationId":"code_quality_analysis_code_quality_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CodeQualityPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/analysis/image-vulnerability":{"post":{"tags":["AI Code Analysis"],"summary":"Image Vulnerability","operationId":"image_vulnerability_analysis_image_vulnerability_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ImgVulnerabilityPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/debug/reverse-dns":{"post":{"tags":["AI Debugging"],"summary":"Reverse Dns","operationId":"reverse_dns_debug_reverse_dns_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ReverseDNSPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/debug/pipeline":{"post":{"tags":["AI Debugging"],"summary":"Debug Pipeline","operationId":"debug_pipeline_debug_pipeline_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/DebugPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/debug/logs":{"post":{"tags":["AI Debugging"],"summary":"Debug App Logs","operationId":"debug_app_logs_debug_logs_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/DebugLogsPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/health":{"get":{"tags":["Health"],"summary":"Health Check","operationId":"health_check_health_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/validate/swagger":{"post":{"tags":["Validations"],"summary":"Validate Swagger Spec","operationId":"validate_swagger_spec_validate_swagger_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserSwaggerPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/edit/kubernetes":{"post":{"tags":["Edit Specs"],"summary":"Edit Kubernetes","operationId":"edit_kubernetes_edit_kubernetes_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/EditKubernetesYAMLPayload"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}}},"components":{"schemas":{"APISpecChatPayload":{"properties":{"query":{"type":"string","title":"Query"},"openapi_spec":{"type":"string","title":"Openapi Spec"},"base_url":{"type":"string","title":"Base Url","default":""},"headers":{"type":"object","title":"Headers","default":{}}},"type":"object","required":["query","openapi_spec"],"title":"APISpecChatPayload"},"APISpecificTestPayload":{"properties":{"openapi_spec":{"type":"string","title":"Openapi Spec"},"endpoint":{"type":"string","title":"Endpoint"},"base_url":{"type":"string","title":"Base Url","default":""},"headers":{"type":"object","title":"Headers","default":{}}},"type":"object","required":["openapi_spec","endpoint"],"title":"APISpecificTestPayload"},"APITestPayload":{"properties":{"openapi_spec":{"type":"string","title":"Openapi Spec"},"base_url":{"type":"string","title":"Base Url","default":""},"headers":{"type":"object","title":"Headers","default":{}}},"type":"object","required":["openapi_spec"],"title":"APITestPayload"},"CodeQualityPayload":{"properties":{"issue_details":{"type":"string","title":"Issue Details"}},"type":"object","required":["issue_details"],"title":"CodeQualityPayload"},"DebugLogsPayload":{"properties":{"logs":{"type":"string","title":"Logs"},"quality":{"type":"string","title":"Quality","default":"medium"}},"type":"object","required":["logs"],"title":"DebugLogsPayload"},"DebugPayload":{"properties":{"logs":{"type":"string","title":"Logs"},"pipeline":{"type":"string","title":"Pipeline"},"quality":{"type":"string","title":"Quality","default":"medium"}},"type":"object","required":["logs","pipeline"],"title":"DebugPayload"},"EditKubernetesYAMLPayload":{"properties":{"openai_api_key_uuid":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Openai Api Key Uuid"},"user_requirement":{"type":"string","title":"User Requirement"},"yaml_string":{"type":"string","title":"Yaml String"}},"type":"object","required":["user_requirement","yaml_string"],"title":"EditKubernetesYAMLPayload"},"EmailMapperPayload":{"properties":{"emails":{"type":"string","title":"Emails"},"usernames":{"type":"string","title":"Usernames"}},"type":"object","required":["emails","usernames"],"title":"EmailMapperPayload"},"GitHubActionStepPayload":{"properties":{"user_instruction":{"type":"string","title":"User Instruction"}},"type":"object","required":["user_instruction"],"title":"GitHubActionStepPayload"},"HTTPValidationError":{"properties":{"detail":{"items":{"$ref":"#/components/schemas/ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"},"ImgVulnerabilityPayload":{"properties":{"trivy_report":{"type":"string","title":"Trivy Report"},"dockerfile":{"type":"string","title":"Dockerfile","default":""}},"type":"object","required":["trivy_report"],"title":"ImgVulnerabilityPayload"},"KubernetesYAMLPayload":{"properties":{"user_instruction":{"type":"string","title":"User Instruction"},"project_id":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Project Id"},"org_id":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Org Id"},"namespace":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Namespace"},"additional_labels":{"anyOf":[{"additionalProperties":{"type":"string"},"type":"object"},{"type":"null"}],"title":"Additional Labels"},"openai_api_key_uuid":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Openai Api Key Uuid"}},"type":"object","required":["user_instruction"],"title":"KubernetesYAMLPayload"},"ReverseDNSPayload":{"properties":{"dns":{"items":{},"type":"array","title":"Dns"},"quality":{"type":"string","title":"Quality","default":"medium"}},"type":"object","required":["dns"],"title":"ReverseDNSPayload"},"SwaggerPayload":{"properties":{"user_instruction":{"type":"string","title":"User Instruction"},"server":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Server"},"user_swagger_spec":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"User Swagger Spec"},"path":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Path"},"http_method":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Http Method"}},"type":"object","required":["user_instruction"],"title":"SwaggerPayload"},"UserSwaggerPayload":{"properties":{"user_swagger_spec":{"type":"string","title":"User Swagger Spec"}},"type":"object","required":["user_swagger_spec"],"title":"UserSwaggerPayload"},"ValidationError":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"}}}}
+openapi: 3.1.0
+info:
+  title: Teams API
+  version: 1.0.0
+paths:
+  /teams:
+    post:
+      summary: Create a new team
+      tags:
+        - Teams
+      requestBody:
+        description: Team creation data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTeamDto'
+      parameters:
+        - name: traceId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-ENV-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Team created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto_CreateTeamResponseDto'
+  /teams/filter:
+    post:
+      summary: Find teams by IDs
+      tags:
+        - Teams
+      requestBody:
+        description: Team IDs to filter
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilterTeamsDto'
+      parameters:
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-TRACE-ID
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto_TeamArray'
+  /teams:
+    get:
+      summary: Get all teams
+      tags:
+        - Teams
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-ENV-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-TRACE-ID
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Team'
+                  meta:
+                    type: object
+                    additionalProperties:
+                      type: object
+                  userData:
+                    type: object
+                    additionalProperties:
+                      type: object
+  /teams/{id}:
+    get:
+      summary: Get a team by ID
+      tags:
+        - Teams
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-ENV-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-TRACE-ID
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Team data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto_Team'
+    put:
+      summary: Update a team by ID
+      tags:
+        - Teams
+      requestBody:
+        description: Team update data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTeamDto'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-ENV-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-TRACE-ID
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto_Team'
+    delete:
+      summary: Delete a team by ID
+      tags:
+        - Teams
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-ORG-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-PROJ-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-ENV-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-TRACE-ID
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Team deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto_DeleteResult'
+components:
+  schemas:
+    CreateTeamDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    UpdateTeamDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    FilterTeamsDto:
+      type: object
+      properties:
+        teamIds:
+          type: array
+          items:
+            type: string
+    Team:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+    DeleteResult:
+      type: object
+      properties:
+        raw:
+          type: array
+          items:
+            type: object
+        affected:
+          type: integer
+    ApiResponseDto_CreateTeamResponseDto:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateTeamResponseDto'
+    ApiResponseDto_Team:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Team'
+    ApiResponseDto_TeamArray:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+    ApiResponseDto_DeleteResult:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/DeleteResult'
+    CreateTeamResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
